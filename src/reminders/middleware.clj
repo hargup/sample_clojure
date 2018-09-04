@@ -56,3 +56,27 @@
             (let [response (handler request)]
               (swap! bucket dec)
               response))))))
+
+(defn- decode-base-64 [text]
+  (String. (.decode (java.util.Base64/getDecoder) text)))
+
+(defn- revstr [string]
+  (apply str (reverse string)))
+
+(defn- verify-user [username password]
+  ;; In real cases the hash of the password
+  ;; will be matched again the hash stored in the database
+  (= username (revstr password)))
+
+(defn wrap-auth [handler]
+  (fn [request]
+    (if-let [auth-header (get-in request [:headers "authorization"])]
+      (let [[type token] (str/split auth-header #" ")
+            decoded-token (decode-base-64 token)
+            [username password] (str/split decoded-token #":")]
+        (if (verify-user username password)
+          (handler request)
+          {:status 403
+           :body {:error "Invalid username or password"}}))
+      {:status 403
+       :body {:error "No authorization token provided"}})))

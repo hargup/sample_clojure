@@ -14,11 +14,12 @@
   (->
    (routes)
    make-handler
-   mw/wrap-log-request
    wrap-params
    mw/wrap-json-request
    mw/wrap-json-response
-   (mw/wrap-rate-limit (config/api-rate))))
+   (mw/wrap-rate-limit (config/api-rate))
+   mw/wrap-auth
+   mw/wrap-log-request))
 
 (defn start-server! []
   (do
