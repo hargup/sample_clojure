@@ -10,3 +10,7 @@
 (s/def ::reminder (s/keys :req-un [::id ::description ::scheduled_time]))
 
 (s/def ::reminders (s/map-of ::id ::reminder))
+
+(s/def ::create-params (s/keys :req-un [::description ::scheduled_time]))
+
+(s/def ::update-params (s/keys :req-un [::description ::scheduled_time]))

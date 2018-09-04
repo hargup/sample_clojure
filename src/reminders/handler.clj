@@ -5,23 +5,25 @@
    [reminders.spec :as spec]
    [clojure.spec.alpha :as s]))
 
-;; Assuming request body confirms the spec, will check fo rthe spec later
-;; Need to parse schedule_time
-(defn create! [request]
-  (let [reminder (reminders/create! (:body request))]
-    {:status 201
-     :body reminder}))
+(defn create! [{:keys [body]}]
+  (if (s/valid? ::spec/create-params body)
+    (let [reminder (reminders/create! body)]
+      {:status 201
+       :body reminder})
+    {:status 400
+     :body {:error "Invalid arguments"}}))
 
-;; Should validate route params in a middleware
-(defn update! [request]
-  (let [id (Integer. (get-in request [:route-params :id]))
-        reminder (reminders/update! (assoc (:body request)
-                                           :id id))]
-    {:status 200
-     :body reminder}))
+(defn update! [{:keys [route-params body]}]
+  (if (s/valid? ::spec/update-params body)
+    (let [id (Integer. (get route-params :id))
+          reminder (reminders/update! (assoc body :id id))]
+      {:status 200
+       :body reminder})
+    {:status 400
+     :body {:error "Invalid arguments"}}))
 
-(defn delete! [request]
-  (let [id (Integer. (get-in request [:route-params :id]))]
+(defn delete! [{:keys [route-params]}]
+  (let [id (Integer. (get route-params :id))]
     (do
       (reminders/delete! {:id id})
       {:status 200
