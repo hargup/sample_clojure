@@ -13,4 +13,4 @@
 
 (s/def ::create-params (s/keys :req-un [::description ::scheduled_time]))
 
-(s/def ::update-params (s/keys :req-un [::description ::scheduled_time]))
+(s/def ::update-params (s/keys :opt-un [::description ::scheduled_time]))

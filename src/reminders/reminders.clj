@@ -25,10 +25,10 @@
 
 (defn update! [params]
   (dosync
-   (let [id (:id params)
-         updated-reminder (merge (get @reminders id) params)]
-     (alter reminders assoc id updated-reminder)
-     updated-reminder)))
+   (when-let [old-reminder (get @reminders (:id params))]
+     (let [updated-reminder (merge old-reminder params)]
+       (alter reminders assoc (:id params) updated-reminder)
+       updated-reminder))))
 
 (defn delete! [{:keys [id]}]
   (dosync

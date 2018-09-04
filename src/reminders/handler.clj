@@ -17,8 +17,11 @@
   (if (s/valid? ::spec/update-params body)
     (let [id (Integer. (get route-params :id))
           reminder (reminders/update! (assoc body :id id))]
-      {:status 200
-       :body reminder})
+      (if reminder
+        {:status 200
+         :body reminder}
+        {:status 404
+         :body "Reminder not found"}))
     {:status 400
      :body {:error "Invalid arguments"}}))
 
