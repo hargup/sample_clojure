@@ -40,13 +40,13 @@
                                                   :date_format date_format})
                         (reminders/list-reminder {:id id}))]
       {:status 200
-       :body reminder}
+       :body {:reminder reminder}}
       {:status 404
        :body "Reminder not found"})))
 
 (defn list-all [{:keys [query-params]}]
   (if-let [date_format (keyword (get query-params "date_format"))]
     {:status 200
-     :body (reminders/list-all {:date_format date_format})}
+     :body {:reminders (reminders/list-all {:date_format date_format})}}
     {:status 200
-     :body (reminders/list-all)}))
+     :body {:reminders (reminders/list-all)}}))

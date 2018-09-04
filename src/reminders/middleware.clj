@@ -47,6 +47,7 @@
       response)))
 
 (defn wrap-rate-limit [handler max-bucket]
+  "Bounds the maximum number of requests that will be processed at time."
   (let [bucket (atom 0)]
     (fn [request]
       (if (> @bucket max-bucket)
