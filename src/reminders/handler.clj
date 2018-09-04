@@ -30,11 +30,14 @@
 (defn list-reminder [{:keys [query-params route-params]}]
   (let [id (Integer. (get route-params :id))
         date_format (keyword (get query-params "date_format"))]
-    {:status 200
-     :body (if date_format
-             (reminders/list-reminder {:id id
-                                       :date_format date_format})
-             (reminders/list-reminder {:id id}))}))
+    (if-let [reminder (if date_format
+                        (reminders/list-reminder {:id id
+                                                  :date_format date_format})
+                        (reminders/list-reminder {:id id}))]
+      {:status 200
+       :body reminder}
+      {:status 404
+       :body "Reminder not found"})))
 
 (defn list-all [{:keys [query-params]}]
   (if-let [date_format (keyword (get query-params "date_format"))]
