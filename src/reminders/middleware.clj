@@ -37,7 +37,22 @@
 
 (defn wrap-log-request [handler]
   (fn [request]
-    (prn "incoming request")
+    (prn "request")
     (prn request)
     (prn "----")
-    (handler request)))
+    (let [response (handler request)]
+      (prn "response")
+      (prn response)
+      (prn "----")
+      response)))
+
+(defn wrap-rate-limit [handler max-bucket]
+  (let [bucket (atom 0)]
+    (fn [request]
+      (if (> @bucket max-bucket)
+        {:status 429
+         :body {:error "Too many requests"}}
+        (do (swap! bucket inc)
+            (let [response (handler request)]
+              (swap! bucket dec)
+              response))))))

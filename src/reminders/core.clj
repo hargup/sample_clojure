@@ -3,6 +3,7 @@
   (:require [org.httpkit.server :as httpkit]
             [reminders.route :refer [routes]]
             [reminders.middleware :as mw]
+            [reminders.config :as config]
             [ring.middleware.params :refer [wrap-params]]
             [reminders.reminders :as reminders]
             [bidi.ring :refer [make-handler]]))
@@ -16,12 +17,13 @@
    mw/wrap-log-request
    wrap-params
    mw/wrap-json-request
-   mw/wrap-json-response))
+   mw/wrap-json-response
+   (mw/wrap-rate-limit (config/api-rate))))
 
 (defn start-server! []
-  (let [port 3636]
-    (reset! server (httpkit/run-server (handler) {:port port}))
-    (println "Server started at port: " port)))
+  (do
+    (reset! server (httpkit/run-server (handler) {:port (config/port)}))
+    (println "Server started at port: " (config/port))))
 
 (defn stop-server! []
   (when-not (nil? @server)
