@@ -15,7 +15,7 @@ Your can either run the project using leinigen.
 lein run
 ```
 
-Or use `lein uberjar` to create an java jar and then run it.
+Or use `lein uberjar` to create a java jar and then run it.
 
 ```
 java -jar target/uberjar/reminders-0.1.0-SNAPSHOT-standalone.jar

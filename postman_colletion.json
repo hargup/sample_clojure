@@ -1,0 +1,609 @@
+{
+	"info": {
+		"_postman_id": "55e79a3a-4da6-4d0f-ab44-5e500aa161fa",
+		"name": "Helpshift | Reminders API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create reminder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e3c12d50-9630-4c12-a16d-53062aaf3a06",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"Get the milk.\", \"scheduled_time\": 1490952963}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders"
+					]
+				},
+				"description": "\t"
+			},
+			"response": []
+		},
+		{
+			"name": "create another reminder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e3c12d50-9630-4c12-a16d-53062aaf3a06",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"Get the milk.\", \"scheduled_time\": 1490952963}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders"
+					]
+				},
+				"description": "\t"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all reminders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ef39329-1dae-432f-b1ad-26324d19f74c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3636/reminders?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders"
+					],
+					"query": [
+						{
+							"key": "date_format",
+							"value": "iso8601",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reminder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a47784a6-3ad6-4d04-b755-ba15a0b8bc77",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"Get some milk and some eggs\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders/1?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"1"
+					],
+					"query": [
+						{
+							"key": "date_format",
+							"value": "iso8601",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update reminder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c610ac3-d291-4658-b9a8-2bf56ee3afa6",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"new discription\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all reminders ISO8601",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e4b699fa-ea39-4b54-85d3-5e35ac1b83a3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3636/reminders?date_format=iso8601",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders"
+					],
+					"query": [
+						{
+							"key": "date_format",
+							"value": "iso8601"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reminder ISO8601",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc58b4eb-29a0-4d70-95c8-01774099741c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3636/reminders/n/1?date_format=iso8601",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"n",
+						"1"
+					],
+					"query": [
+						{
+							"key": "date_format",
+							"value": "iso8601"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create wrong keys",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d157a77f-5924-4453-b9f2-9f34523c2bae",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"desc\": \"Get me some milk please\", \"scheduled_time\": 1490952963}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get wrong password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "511c7750-95d3-4cbb-a2fe-094713af4586",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3636/reminders?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders"
+					],
+					"query": [
+						{
+							"key": "date_format",
+							"value": "iso8601",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update non existant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88538a2f-0452-4e16-bc2b-2efe3592d851",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"new discription\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete reminder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "917715ce-5c96-4183-9d5d-885513261f8e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3636/reminders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete non existant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "917715ce-5c96-4183-9d5d-885513261f8e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3636/reminders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non existant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e51ddae-e7a8-4478-ab64-59a98c104798",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"Get some milk and some eggs\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3636/reminders/1?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3636",
+					"path": [
+						"reminders",
+						"1"
+					],
+					"query": [
+						{
+							"key": "date_format",
+							"value": "iso8601",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "nimda",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4a98a131-ad7d-4460-bc94-579118d0c1b5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "49955f01-1389-4c94-818c-83027b4b2fe4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

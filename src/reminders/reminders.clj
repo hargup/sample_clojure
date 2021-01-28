@@ -26,7 +26,7 @@
 (defn update! [params]
   (dosync
    (when-let [old-reminder (get @reminders (:id params))]
-     (let [updated-reminder (merge old-reminder params)]
+     (let [updated-reminder (merge old-reminder (select-keys params [:description :scheduled_time]))]
        (alter reminders assoc (:id params) updated-reminder)
        updated-reminder))))
 
